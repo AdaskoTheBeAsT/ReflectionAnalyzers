@@ -64,9 +64,9 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindExpression(expression);
-        Assert.AreEqual(true, Type.TryGet(node, semanticModel, CancellationToken.None, out var type, out var source));
-        Assert.AreEqual(expected, type.ToDisplayString());
-        Assert.AreEqual(expectedSource, source.ToString());
+        Assert.That(Type.TryGet(node, semanticModel, CancellationToken.None, out var type, out var source), Is.True);
+        Assert.That(type.ToDisplayString(), Is.EqualTo(expected));
+        Assert.That(source.ToString(), Is.EqualTo(expectedSource));
     }
 
     [TestCase("field")]
@@ -102,9 +102,9 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = ((MemberAccessExpressionSyntax)syntaxTree.FindInvocation("ToString()").Expression).Expression;
-        Assert.AreEqual(true, Type.TryGet(node, semanticModel, CancellationToken.None, out var type, out var source));
-        Assert.AreEqual("int", type.ToDisplayString());
-        Assert.AreEqual("typeof(int)", source.ToString());
+        Assert.That(Type.TryGet(node, semanticModel, CancellationToken.None, out var type, out var source), Is.True);
+        Assert.That(type.ToDisplayString(), Is.EqualTo("int"));
+        Assert.That(source.ToString(), Is.EqualTo("typeof(int)"));
     }
 
     [TestCase("Assembly.Load(\"mscorlib\").GetType(\"System.Int32\")")]
@@ -140,6 +140,6 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindExpression(expression);
-        Assert.AreEqual(false, Type.TryGet(node, semanticModel, CancellationToken.None, out _, out _));
+        Assert.That(Type.TryGet(node, semanticModel, CancellationToken.None, out _, out _), Is.False);
     }
 }

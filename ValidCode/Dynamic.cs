@@ -11,6 +11,6 @@ public class Dynamic
     {
         dynamic expando = new ExpandoObject();
         expando.name = "John";
-        Assert.AreEqual("John", ((IDictionary<string, object>)expando)["name"]);
+        Assert.That(((IDictionary<string, object>)expando)["name"], Is.EqualTo("John"));
     }
 }

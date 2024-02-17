@@ -10,16 +10,18 @@ public class Instance
     [Test]
     public void Valid()
     {
-        Assert.AreEqual(3, ((Func<C, string, int>)Delegate.CreateDelegate(
-                            typeof(Func<C, string, int>),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke(new C(), "abc"));
+        Assert.That(((Func<C, string, int>)Delegate.CreateDelegate(
+                        typeof(Func<C, string, int>),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke(new C(), "abc"),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((Func<string, int>)Delegate.CreateDelegate(
-                            typeof(Func<string, int>),
-                            new C(),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke("abc"));
+        Assert.That(((Func<string, int>)Delegate.CreateDelegate(
+                        typeof(Func<string, int>),
+                        new C(),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke("abc"),
+                    Is.EqualTo(3));
 
         ((Action<C, int>)Delegate.CreateDelegate(
                 typeof(Action<C, int>),
@@ -44,17 +46,17 @@ public class Instance
                 typeof(C).GetMethod(nameof(C.StringVoid), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
             .Invoke("abc");
 
-        Assert.AreEqual(1, ((Func<C, int>)Delegate.CreateDelegate(
-                            typeof(Func<C, int>),
-                            typeof(C).GetProperty(
-                                nameof(C.Value),
-                                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.GetMethod!)).Invoke(new C()));
+        Assert.That(((Func<C, int>)Delegate.CreateDelegate(
+                        typeof(Func<C, int>),
+                        typeof(C).GetProperty(
+                            nameof(C.Value),
+                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.GetMethod!)).Invoke(new C()), Is.EqualTo(1));
 
-        Assert.AreEqual(1, ((Func<C, int>)Delegate.CreateDelegate(
-                            typeof(Func<C, int>),
-                            typeof(C).GetProperty(
-                                nameof(C.Value),
-                                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly!)!.GetGetMethod()!)).Invoke(new C()));
+        Assert.That(((Func<C, int>)Delegate.CreateDelegate(
+                        typeof(Func<C, int>),
+                        typeof(C).GetProperty(
+                            nameof(C.Value),
+                            BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly!)!.GetGetMethod()!)).Invoke(new C()), Is.EqualTo(1));
     }
 
     private class C

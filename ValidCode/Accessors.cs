@@ -18,17 +18,17 @@ public class Accessors
     {
         var instance = new Accessors { P = 1 };
 #pragma warning disable REFL014
-        Assert.NotNull(typeof(Accessors).GetMethod("get_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.AreEqual(1, typeof(Accessors).GetMethod("get_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, null));
+        Assert.That(typeof(Accessors).GetMethod("get_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(Accessors).GetMethod("get_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, null), Is.EqualTo(1));
 
-        Assert.NotNull(typeof(Accessors).GetMethod("set_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.Null(typeof(Accessors).GetMethod("set_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { 1 }));
+        Assert.That(typeof(Accessors).GetMethod("set_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(Accessors).GetMethod("set_P", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { 1 }), Is.Null);
 
-        Assert.NotNull(typeof(Accessors).GetMethod("add_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.Null(typeof(Accessors).GetMethod("add_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { new EventHandler((_, __) => { }) }));
+        Assert.That(typeof(Accessors).GetMethod("add_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(Accessors).GetMethod("add_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { new EventHandler((_, __) => { }) }), Is.Null);
 
-        Assert.NotNull(typeof(Accessors).GetMethod("remove_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.Null(typeof(Accessors).GetMethod("remove_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { new EventHandler((_, __) => { }) }));
+        Assert.That(typeof(Accessors).GetMethod("remove_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(Accessors).GetMethod("remove_E", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)?.Invoke(instance, new object[] { new EventHandler((_, __) => { }) }), Is.Null);
 #pragma warning restore REFL014
     }
 }

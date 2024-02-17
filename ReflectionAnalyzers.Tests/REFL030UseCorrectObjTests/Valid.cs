@@ -62,7 +62,9 @@ namespace N
         public static void M(Type unused)
         {
             var type = typeof(C);
+#pragma warning disable SYSLIB0050 // Type or member is obsolete
             var instance = FormatterServices.GetUninitializedObject(type);
+#pragma warning restore SYSLIB0050 // Type or member is obsolete
             type.GetConstructor(Type.EmptyTypes).Invoke(instance, null);
         }
     }

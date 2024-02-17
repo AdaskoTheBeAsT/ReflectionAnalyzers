@@ -1,4 +1,4 @@
-namespace ValidCode;
+﻿namespace ValidCode;
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -9,7 +9,7 @@ public class NamedIndexer
     [Test]
     public void Valid()
     {
-        Assert.NotNull(typeof(NamedIndexer).GetProperty("Bar", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        Assert.That(typeof(NamedIndexer).GetProperty("Bar", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
     }
 
     [IndexerName("Bar")]

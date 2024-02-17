@@ -9,12 +9,12 @@ public class MakeGenericMethod
     [Test]
     public void Valid()
     {
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(M), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)));
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(M), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)));
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToIComparableOfT), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)));
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToIComparableOfT), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)));
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToClass), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)));
-        Assert.NotNull(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToStruct), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)));
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(M), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)), Is.Not.Null);
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(M), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)), Is.Not.Null);
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToIComparableOfT), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)), Is.Not.Null);
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToIComparableOfT), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)), Is.Not.Null);
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToClass), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(string)), Is.Not.Null);
+        Assert.That(typeof(MakeGenericMethod).GetMethod(nameof(ConstrainedToStruct), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)!.MakeGenericMethod(typeof(int)), Is.Not.Null);
     }
 
     public T M<T>(T t) => t;

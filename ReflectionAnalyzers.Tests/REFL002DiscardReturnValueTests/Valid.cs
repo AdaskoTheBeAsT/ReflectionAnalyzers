@@ -35,9 +35,8 @@ namespace N
         RoslynAssert.Valid(Analyzer, Descriptor, code);
     }
 
-    [TestCase("Assert.Null(typeof(C).GetMethod(nameof(M)).Invoke(null, null))")]
-    [TestCase("Assert.IsNull(typeof(C).GetMethod(nameof(M)).Invoke(null, null))")]
-    [TestCase("Assert.AreEqual(null, typeof(C).GetMethod(nameof(M)).Invoke(null, null))")]
+    [TestCase("Assert.That(typeof(C).GetMethod(nameof(M)).Invoke(null, null), Is.Null)")]
+    [TestCase("Assert.That(typeof(C).GetMethod(nameof(M)).Invoke(null, null), Is.EqualTo(null))")]
     public static void WhenUsedInAssert(string call)
     {
         var code = @"
@@ -50,14 +49,14 @@ namespace N
     {
         public C()
         {
-            Assert.Null(typeof(C).GetMethod(nameof(M)).Invoke(null, null));
+            Assert.That(typeof(C).GetMethod(nameof(M)).Invoke(null, null), Is.Null);
         }
 
         public static void M()
         {
         }
     }
-}".AssertReplace("Assert.Null(typeof(C).GetMethod(nameof(M)).Invoke(null, null))", call);
+}".AssertReplace("Assert.That(typeof(C).GetMethod(nameof(M)).Invoke(null, null), Is.Null)", call);
 
         RoslynAssert.Valid(Analyzer, Descriptor, code);
     }

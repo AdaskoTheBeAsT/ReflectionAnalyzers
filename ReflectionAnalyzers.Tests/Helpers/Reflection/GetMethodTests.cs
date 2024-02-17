@@ -35,9 +35,9 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var invocation = syntaxTree.FindInvocation("GetMethod");
         var match = GetMethod.Match(invocation, semanticModel, CancellationToken.None);
-        Assert.AreEqual(FilterMatch.Single, match?.Member.Match);
-        Assert.AreEqual(expected,           match?.Member.Symbol.ToDisplayString());
-        Assert.AreEqual(expected,           match?.Single.ToDisplayString());
+        Assert.That(match?.Member.Match, Is.EqualTo(FilterMatch.Single));
+        Assert.That(match?.Member.Symbol.ToDisplayString(), Is.EqualTo(expected));
+        Assert.That(match?.Single.ToDisplayString(), Is.EqualTo(expected));
     }
 
     [TestCase("typeof(Array).GetMethod(nameof(Array.CreateInstance), new[] { typeof(Type), typeof(string) })")]
@@ -64,7 +64,7 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var invocation = syntaxTree.FindInvocation("GetMethod");
         var match = GetMethod.Match(invocation, semanticModel, CancellationToken.None);
-        Assert.AreEqual(FilterMatch.WrongTypes, match?.Member.Match);
+        Assert.That(match?.Member.Match, Is.EqualTo(FilterMatch.WrongTypes));
     }
 
     [TestCase("typeof(C).GetMethod(nameof(M), new[] { typeof(IComparable) })", "N.C.M(System.IComparable)")]
@@ -114,9 +114,9 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var invocation = syntaxTree.FindInvocation("GetMethod");
         var match = GetMethod.Match(invocation, semanticModel, CancellationToken.None);
-        Assert.AreEqual(FilterMatch.Single, match?.Member.Match);
-        Assert.AreEqual(expected,           match?.Member.Symbol.ToDisplayString());
-        Assert.AreEqual(expected,           match?.Single.ToDisplayString());
+        Assert.That(match?.Member.Match, Is.EqualTo(FilterMatch.Single));
+        Assert.That(match?.Member.Symbol.ToDisplayString(), Is.EqualTo(expected));
+        Assert.That(match?.Single.ToDisplayString(), Is.EqualTo(expected));
     }
 
     [TestCase("typeof(A).GetMethod(\"M\", new[] { typeof(int) })", "N.A.M(int)")]
@@ -150,9 +150,9 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var invocation = syntaxTree.FindInvocation("GetMethod");
         var match = GetMethod.Match(invocation, semanticModel, CancellationToken.None);
-        Assert.AreEqual(FilterMatch.Single, match?.Member.Match);
-        Assert.AreEqual(expected,           match?.Member.Symbol.ToDisplayString());
-        Assert.AreEqual(expected,           match?.Single.ToDisplayString());
+        Assert.That(match?.Member.Match, Is.EqualTo(FilterMatch.Single));
+        Assert.That(match?.Member.Symbol.ToDisplayString(), Is.EqualTo(expected));
+        Assert.That(match?.Single.ToDisplayString(), Is.EqualTo(expected));
     }
 
     [Test]
@@ -175,6 +175,6 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var invocation = syntaxTree.FindInvocation("GetMethod");
         var match = GetMethod.Match(invocation, semanticModel, CancellationToken.None);
-        Assert.AreEqual(FilterMatch.PotentiallyInvisible, match?.Member.Match);
+        Assert.That(match?.Member.Match, Is.EqualTo(FilterMatch.PotentiallyInvisible));
     }
 }

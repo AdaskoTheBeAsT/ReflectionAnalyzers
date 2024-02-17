@@ -1,4 +1,4 @@
-namespace ValidCode;
+﻿namespace ValidCode;
 
 using System;
 using System.Reflection;
@@ -16,11 +16,11 @@ class NotInSource
     public void Valid()
     {
         const string InnerExceptionCount = "InnerExceptionCount";
-        Assert.NotNull(typeof(AggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance));
-        Assert.NotNull(typeof(AggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.NotNull(typeof(CustomAggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        Assert.That(typeof(AggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance), Is.Not.Null);
+        Assert.That(typeof(AggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(CustomAggregateException).GetProperty(InnerExceptionCount, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
 
-        Assert.NotNull(typeof(Array).GetMethod(nameof(Array.CreateInstance), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(Type), typeof(int) }, null));
-        Assert.NotNull(typeof(Control).GetMethod(nameof(Control.CreateControl), BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(bool) }, null));
+        Assert.That(typeof(Array).GetMethod(nameof(Array.CreateInstance), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(Type), typeof(int) }, null), Is.Not.Null);
+        Assert.That(typeof(Control).GetMethod(nameof(Control.CreateControl), BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(bool) }, null), Is.Not.Null);
     }
 }

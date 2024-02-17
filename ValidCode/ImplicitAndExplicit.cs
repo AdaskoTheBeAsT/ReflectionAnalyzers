@@ -14,8 +14,8 @@ public class ExplicitImplicit : IExplicitImplicit
     [Test]
     public void Valid()
     {
-        Assert.NotNull(typeof(ExplicitImplicit).GetEvent(nameof(this.Bar), BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.NotNull(typeof(IExplicitImplicit).GetEvent(nameof(IExplicitImplicit.E), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        Assert.That(typeof(ExplicitImplicit).GetEvent(nameof(this.Bar), BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(IExplicitImplicit).GetEvent(nameof(IExplicitImplicit.E), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
     }
 
     internal event EventHandler? Bar;

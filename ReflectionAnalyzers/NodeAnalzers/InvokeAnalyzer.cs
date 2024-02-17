@@ -228,9 +228,7 @@ internal class InvokeAnalyzer : DiagnosticAnalyzer
 
         bool IsAssert(InvocationExpressionSyntax candidate)
         {
-            return candidate.TryGetTarget(KnownSymbol.NUnitAssert.Null, context.SemanticModel, context.CancellationToken, out _) ||
-                   candidate.TryGetTarget(KnownSymbol.NUnitAssert.IsNull, context.SemanticModel, context.CancellationToken, out _) ||
-                   candidate.TryGetTarget(KnownSymbol.NUnitAssert.AreEqual, context.SemanticModel, context.CancellationToken, out _);
+            return candidate.TryGetTarget(KnownSymbol.NUnitAssert.That, context.SemanticModel, context.CancellationToken, out _);
         }
     }
 

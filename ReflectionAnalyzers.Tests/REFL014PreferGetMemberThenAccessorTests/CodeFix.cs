@@ -311,7 +311,7 @@ namespace BinaryReferencedAssembly
                                         .GetCompilationAsync()
                                         .ConfigureAwait(true);
         var type = compilation.GetTypeByMetadataName("BinaryReferencedAssembly.C");
-        CollectionAssert.IsEmpty(type.GetMembers("P"));
+        Assert.That(type.GetMembers("P"), Is.Empty);
         RoslynAssert.CodeFix(Analyzer, Fix, ExpectedDiagnostic, solution, after);
     }
 
@@ -658,7 +658,7 @@ namespace N.BinaryReferencedAssembly
                                         .GetCompilationAsync()
                                         .ConfigureAwait(true);
 
-        CollectionAssert.IsEmpty(compilation.GetTypeByMetadataName("N.BinaryReferencedAssembly.C1").GetMembers("E"));
+        Assert.That(compilation.GetTypeByMetadataName("N.BinaryReferencedAssembly.C1").GetMembers("E"), Is.Empty);
         var message = @"Prefer typeof(BinaryReferencedAssembly.C1).GetEvent(""E"", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).AddMethod";
         RoslynAssert.CodeFix(Analyzer, Fix, ExpectedDiagnostic.WithMessage(message), solution, after);
     }

@@ -1,4 +1,4 @@
-// ReSharper disable All
+﻿// ReSharper disable All
 namespace ValidCode;
 
 using System.Reflection;
@@ -9,8 +9,8 @@ public class GenericMember
     [Test]
     public void Valid()
     {
-        Assert.NotNull(typeof(GenericMember).GetMethod(nameof(this.Id), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
-        Assert.NotNull(typeof(GenericMember).GetNestedType("Bar`1", BindingFlags.Public));
+        Assert.That(typeof(GenericMember).GetMethod(nameof(this.Id), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly), Is.Not.Null);
+        Assert.That(typeof(GenericMember).GetNestedType("Bar`1", BindingFlags.Public), Is.Not.Null);
     }
 
     public T Id<T>(T value) => value;

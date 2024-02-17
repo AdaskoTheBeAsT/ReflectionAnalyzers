@@ -13,7 +13,7 @@ public static class GenericTypeNameTests
     [TestCase("System.Collections.Generic.KeyValuePair`2 [System.Int32,System.String]")]
     public static void TryGetGenericWhenFalse(string name)
     {
-        Assert.AreEqual(null, GenericTypeName.TryParse(name));
+        Assert.That(GenericTypeName.TryParse(name), Is.Null);
     }
 
     [TestCase("System.Nullable`1[System.Int32]", "System.Int32")]
@@ -22,10 +22,10 @@ public static class GenericTypeNameTests
     public static void TryGetGenericWhenNullable(string name, string arg)
     {
         var generic = GenericTypeName.TryParse(name).Value;
-        Assert.AreEqual("System.Nullable`1", generic.MetadataName);
+        Assert.That(generic.MetadataName, Is.EqualTo("System.Nullable`1"));
         var typeArgument = generic.TypeArguments.Single();
-        Assert.AreEqual(arg, typeArgument.MetadataName);
-        Assert.AreEqual(null, typeArgument.TypeArguments);
+        Assert.That(typeArgument.MetadataName, Is.EqualTo(arg));
+        Assert.That(typeArgument.TypeArguments, Is.Null);
     }
 
     [TestCase("System.Collections.Generic.KeyValuePair`2[System.Int32,System.String]", "System.Int32", "System.String")]
@@ -40,13 +40,13 @@ public static class GenericTypeNameTests
     public static void TryGetGenericWhenKeyValuePair(string name, string arg0, string arg1)
     {
         var generic = GenericTypeName.TryParse(name).Value;
-        Assert.AreEqual("System.Collections.Generic.KeyValuePair`2", generic.MetadataName);
+        Assert.That(generic.MetadataName, Is.EqualTo("System.Collections.Generic.KeyValuePair`2"));
         var typeArguments = generic.TypeArguments;
-        Assert.AreEqual(2, typeArguments.Length);
-        Assert.AreEqual(arg0, typeArguments[0].MetadataName);
-        Assert.AreEqual(null, typeArguments[0].TypeArguments);
-        Assert.AreEqual(arg1, typeArguments[1].MetadataName);
-        Assert.AreEqual(null, typeArguments[1].TypeArguments);
+        Assert.That(typeArguments.Length, Is.EqualTo(2));
+        Assert.That(typeArguments[0].MetadataName, Is.EqualTo(arg0));
+        Assert.That(typeArguments[0].TypeArguments, Is.Null);
+        Assert.That(typeArguments[1].MetadataName, Is.EqualTo(arg1));
+        Assert.That(typeArguments[1].TypeArguments, Is.Null);
     }
 
     [TestCase("System.Nullable`1[System.Collections.Generic.KeyValuePair`2[System.Int32,System.String]]", "System.Int32", "System.String")]
@@ -54,14 +54,14 @@ public static class GenericTypeNameTests
     public static void TryGetGenericWhenNullableKeyValuePair(string name, string arg0, string arg1)
     {
         var generic = GenericTypeName.TryParse(name).Value;
-        Assert.AreEqual("System.Nullable`1", generic.MetadataName);
+        Assert.That(generic.MetadataName, Is.EqualTo("System.Nullable`1"));
         var typeArgument = generic.TypeArguments.Single();
-        Assert.AreEqual("System.Collections.Generic.KeyValuePair`2", typeArgument.MetadataName);
+        Assert.That(typeArgument.MetadataName, Is.EqualTo("System.Collections.Generic.KeyValuePair`2"));
         var genericArguments = typeArgument.TypeArguments;
-        Assert.AreEqual(2, genericArguments.Count);
-        Assert.AreEqual(arg0, genericArguments[0].MetadataName);
-        Assert.AreEqual(null, genericArguments[0].TypeArguments);
-        Assert.AreEqual(arg1, genericArguments[1].MetadataName);
-        Assert.AreEqual(null, genericArguments[1].TypeArguments);
+        Assert.That(genericArguments.Count, Is.EqualTo(2));
+        Assert.That(genericArguments[0].MetadataName, Is.EqualTo(arg0));
+        Assert.That(genericArguments[0].TypeArguments, Is.Null);
+        Assert.That(genericArguments[1].MetadataName, Is.EqualTo(arg1));
+        Assert.That(genericArguments[1].TypeArguments, Is.Null);
     }
 }

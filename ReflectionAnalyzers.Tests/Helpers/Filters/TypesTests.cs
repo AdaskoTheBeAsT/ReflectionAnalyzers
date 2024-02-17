@@ -37,11 +37,11 @@ namespace N
         var m1 = semanticModel.GetDeclaredSymbol(syntaxTree.FindMethodDeclaration(signature1), CancellationToken.None);
         var m2 = semanticModel.GetDeclaredSymbol(syntaxTree.FindMethodDeclaration(signature2), CancellationToken.None);
         var invocation = syntaxTree.FindInvocation("GetMethod");
-        Assert.AreEqual(true, Types.TryCreate(invocation, (IMethodSymbol?)semanticModel.GetSymbolInfo(invocation).Symbol, semanticModel, CancellationToken.None, out var types));
-        Assert.AreEqual(true, types.TryMostSpecific(m1, m2, compilation, out var match));
-        Assert.AreEqual(m1, match);
-        Assert.AreEqual(true, types.TryMostSpecific(m2, m1, compilation, out match));
-        Assert.AreEqual(m1, match);
+        Assert.That(Types.TryCreate(invocation, (IMethodSymbol?)semanticModel.GetSymbolInfo(invocation).Symbol, semanticModel, CancellationToken.None, out var types), Is.True);
+        Assert.That(types.TryMostSpecific(m1, m2, compilation, out var match), Is.True);
+        Assert.That(match, Is.EqualTo(m1));
+        Assert.That(types.TryMostSpecific(m2, m1, compilation, out match), Is.True);
+        Assert.That(match, Is.EqualTo(m1));
     }
 
     [TestCase("new[] { typeof(int), typeof(int) }", "M(IFormattable _, object __)", "M(object _, IFormattable __)")]
@@ -70,7 +70,7 @@ namespace N
         var m1 = semanticModel.GetDeclaredSymbol(syntaxTree.FindMethodDeclaration(signature1), CancellationToken.None);
         var m2 = semanticModel.GetDeclaredSymbol(syntaxTree.FindMethodDeclaration(signature2), CancellationToken.None);
         var invocation = syntaxTree.FindInvocation("GetMethod");
-        Assert.AreEqual(true, Types.TryCreate(invocation, (IMethodSymbol?)semanticModel.GetSymbolInfo(invocation).Symbol, semanticModel, CancellationToken.None, out var types));
-        Assert.AreEqual(false, types.TryMostSpecific(m1, m2, compilation, out _));
+        Assert.That(Types.TryCreate(invocation, (IMethodSymbol?)semanticModel.GetSymbolInfo(invocation).Symbol, semanticModel, CancellationToken.None, out var types), Is.True);
+        Assert.That(types.TryMostSpecific(m1, m2, compilation, out _), Is.False);
     }
 }

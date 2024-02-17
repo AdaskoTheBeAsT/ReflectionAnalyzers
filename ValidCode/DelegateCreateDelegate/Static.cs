@@ -10,35 +10,40 @@ public class Static
     [Test]
     public void Valid()
     {
-        Assert.AreEqual(3, ((Func<string, int>)Delegate.CreateDelegate(
-                            typeof(Func<string, int>),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke("abc"));
+        Assert.That(((Func<string, int>)Delegate.CreateDelegate(
+                        typeof(Func<string, int>),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke("abc"),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((Func<string, int>?)Delegate.CreateDelegate(
-                            typeof(Func<string, int>),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
-                            throwOnBindFailure: true))
-                        !.Invoke("abc"));
+        Assert.That(((Func<string, int>?)Delegate.CreateDelegate(
+                        typeof(Func<string, int>),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
+                        throwOnBindFailure: true))
+                    !.Invoke("abc"),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((Func<int>)Delegate.CreateDelegate(
-                            typeof(Func<int>),
-                            "abc",
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke());
+        Assert.That(((Func<int>)Delegate.CreateDelegate(
+                        typeof(Func<int>),
+                        "abc",
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke(),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(-1, ((Func<int>)Delegate.CreateDelegate(
+        Assert.That(((Func<int>)Delegate.CreateDelegate(
                             typeof(Func<int>),
                             null,
                             typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke());
+                        .Invoke(),
+                        Is.EqualTo(-1));
 
-        Assert.AreEqual(3, ((Func<int>?)Delegate.CreateDelegate(
+        Assert.That(((Func<int>?)Delegate.CreateDelegate(
                             typeof(Func<int>),
                             "abc",
                             typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
                             throwOnBindFailure: true))
-                        !.Invoke());
+                        !.Invoke(),
+                        Is.EqualTo(3));
 
         ((Action)Delegate.CreateDelegate(
             typeof(Action),

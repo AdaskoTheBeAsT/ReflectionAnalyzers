@@ -19,7 +19,7 @@ namespace N
     {
     }
 }");
-        Assert.AreEqual("BindingFlags." + flags, ((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")));
+        Assert.That(((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")), Is.EqualTo("BindingFlags." + flags));
     }
 
     [TestCaseSource(nameof(Flags))]
@@ -34,7 +34,7 @@ namespace N
     {
     }
 }");
-        Assert.AreEqual(flags.ToString(), ((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")));
+        Assert.That(((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")), Is.EqualTo(flags.ToString()));
     }
 
     [TestCaseSource(nameof(Flags))]
@@ -49,6 +49,6 @@ namespace N
     {
     }
 }");
-        Assert.AreEqual(flags.ToString(), ((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")));
+        Assert.That(((BindingFlags)flags).ToDisplayString(tree.FindClassDeclaration("C")), Is.EqualTo(flags.ToString()));
     }
 }

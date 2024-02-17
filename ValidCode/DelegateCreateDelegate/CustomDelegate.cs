@@ -15,29 +15,33 @@ public class CustomDelegate
     [Test]
     public void Valid()
     {
-        Assert.AreEqual(3, ((StringInt)Delegate.CreateDelegate(
-                            typeof(StringInt),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke("abc"));
+        Assert.That(((StringInt)Delegate.CreateDelegate(
+                        typeof(StringInt),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke("abc"),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((StringInt?)Delegate.CreateDelegate(
-                            typeof(StringInt),
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
-                            throwOnBindFailure: true))
-                        ?.Invoke("abc"));
+        Assert.That(((StringInt?)Delegate.CreateDelegate(
+                        typeof(StringInt),
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
+                        throwOnBindFailure: true))
+                    ?.Invoke("abc"),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((EmptyInt)Delegate.CreateDelegate(
-                            typeof(EmptyInt),
-                            "abc",
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
-                        .Invoke());
+        Assert.That(((EmptyInt)Delegate.CreateDelegate(
+                        typeof(EmptyInt),
+                        "abc",
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!))
+                    .Invoke(),
+                    Is.EqualTo(3));
 
-        Assert.AreEqual(3, ((EmptyInt?)Delegate.CreateDelegate(
-                            typeof(EmptyInt),
-                            "abc",
-                            typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
-                            throwOnBindFailure: true))
-                        ?.Invoke());
+        Assert.That(((EmptyInt?)Delegate.CreateDelegate(
+                        typeof(EmptyInt),
+                        "abc",
+                        typeof(C).GetMethod(nameof(C.StringInt), BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, null, new[] { typeof(string) }, null)!,
+                        throwOnBindFailure: true))
+                    ?.Invoke(),
+                    Is.EqualTo(3));
 
         ((Void)Delegate.CreateDelegate(
                 typeof(Void),

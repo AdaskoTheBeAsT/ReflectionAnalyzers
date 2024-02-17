@@ -9,22 +9,22 @@ public class ActivatorCreateInstance
     [Test]
     public void Valid()
     {
-        Assert.NotNull(Activator.CreateInstance<ImplicitDefaultConstructor>());
-        Assert.NotNull((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor)));
-        Assert.NotNull((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor), true));
-        Assert.NotNull((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor), false));
+        Assert.That(Activator.CreateInstance<ImplicitDefaultConstructor>(), Is.Not.Null);
+        Assert.That((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor)), Is.Not.Null);
+        Assert.That((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor), true), Is.Not.Null);
+        Assert.That((ImplicitDefaultConstructor?)Activator.CreateInstance(typeof(ImplicitDefaultConstructor), false), Is.Not.Null);
 
-        Assert.NotNull(Activator.CreateInstance<ExplicitDefaultConstructor>());
-        Assert.NotNull((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor)));
-        Assert.NotNull((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor), true));
-        Assert.NotNull((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor), false));
+        Assert.That(Activator.CreateInstance<ExplicitDefaultConstructor>(), Is.Not.Null);
+        Assert.That((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor)), Is.Not.Null);
+        Assert.That((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor), true), Is.Not.Null);
+        Assert.That((ExplicitDefaultConstructor?)Activator.CreateInstance(typeof(ExplicitDefaultConstructor), false), Is.Not.Null);
 
-        Assert.NotNull((PrivateDefaultConstructor?)Activator.CreateInstance(typeof(PrivateDefaultConstructor), true));
+        Assert.That((PrivateDefaultConstructor?)Activator.CreateInstance(typeof(PrivateDefaultConstructor), true), Is.Not.Null);
 
-        Assert.NotNull((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), 1));
-        Assert.NotNull((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), 1.2));
-        Assert.NotNull((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), new object[] { 1 }));
-        Assert.NotNull((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), new object[] { 1.2 }));
+        Assert.That((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), 1), Is.Not.Null);
+        Assert.That((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), 1.2), Is.Not.Null);
+        Assert.That((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), new object[] { 1 }), Is.Not.Null);
+        Assert.That((SingleDoubleParameter?)Activator.CreateInstance(typeof(SingleDoubleParameter), new object[] { 1.2 }), Is.Not.Null);
     }
 
     public T Create<T>() => Activator.CreateInstance<T>();

@@ -14,7 +14,7 @@ public static class BindingFlagsTests
     [TestCaseSource(nameof(SystemReflectionFlags))]
     public static void IsMatched(System.Reflection.BindingFlags system)
     {
-        Assert.AreEqual(true, Enum.TryParse<ReflectionAnalyzers.BindingFlags>(system.ToString("G"), out var local));
-        Assert.AreEqual(system.ToString("D"), local.ToString("D"));
+        Assert.That(Enum.TryParse<ReflectionAnalyzers.BindingFlags>(system.ToString("G"), out var local), Is.True);
+        Assert.That(local.ToString("D"), Is.EqualTo(system.ToString("D")));
     }
 }

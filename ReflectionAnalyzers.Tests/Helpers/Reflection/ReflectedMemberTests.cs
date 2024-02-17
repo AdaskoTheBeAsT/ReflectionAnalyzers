@@ -35,9 +35,9 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindInvocation(call);
-        Assert.AreEqual(true, ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out var type, out var source));
-        Assert.AreEqual(expected, type.MetadataName);
-        Assert.AreEqual(expectedSource, source.ToString());
+        Assert.That(ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out var type, out var source), Is.True);
+        Assert.That(type.MetadataName, Is.EqualTo(expected));
+        Assert.That(source.ToString(), Is.EqualTo(expectedSource));
     }
 
     [TestCase("typeof(C)", "C")]
@@ -68,9 +68,9 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindInvocation("GetMethod");
-        Assert.AreEqual(true, ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out var type, out var instance));
-        Assert.AreEqual(expected, type.MetadataName);
-        Assert.AreEqual(typeExpression, instance.ToString());
+        Assert.That(ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out var type, out var instance), Is.True);
+        Assert.That(type.MetadataName, Is.EqualTo(expected));
+        Assert.That(instance.ToString(), Is.EqualTo(typeExpression));
     }
 
     [Test]
@@ -95,7 +95,7 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindInvocation("GetMethod");
-        Assert.AreEqual(false, ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out _, out _));
+        Assert.That(ReflectedMember.TryGetType(node, semanticModel, CancellationToken.None, out _, out _), Is.False);
     }
 
     [Test]

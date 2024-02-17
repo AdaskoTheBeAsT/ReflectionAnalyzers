@@ -43,6 +43,6 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var node = syntaxTree.FindExpression(call);
-        Assert.AreEqual(expected, MethodInfo.Find(node, semanticModel, CancellationToken.None)?.Method.ToString());
+        Assert.That(MethodInfo.Find(node, semanticModel, CancellationToken.None)?.Method.ToString(), Is.EqualTo(expected));
     }
 }

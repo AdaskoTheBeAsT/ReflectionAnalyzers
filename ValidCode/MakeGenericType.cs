@@ -10,12 +10,12 @@ public class MakeGenericType
     [Test]
     public void Valid()
     {
-        Assert.NotNull(typeof(Foo<>).MakeGenericType(typeof(int)));
-        Assert.NotNull(typeof(Foo<>).MakeGenericType(typeof(string)));
-        Assert.NotNull(typeof(Foo<>.Bar).MakeGenericType(typeof(int)));
-        Assert.NotNull(typeof(ConstrainedToIComparableOfT<>).MakeGenericType(typeof(int)));
-        Assert.NotNull(typeof(ConstrainedToClass<>).MakeGenericType(typeof(string)));
-        Assert.NotNull(typeof(ConstrainedToStruct<>).MakeGenericType(typeof(int)));
+        Assert.That(typeof(Foo<>).MakeGenericType(typeof(int)), Is.Not.Null);
+        Assert.That(typeof(Foo<>).MakeGenericType(typeof(string)), Is.Not.Null);
+        Assert.That(typeof(Foo<>.Bar).MakeGenericType(typeof(int)), Is.Not.Null);
+        Assert.That(typeof(ConstrainedToIComparableOfT<>).MakeGenericType(typeof(int)), Is.Not.Null);
+        Assert.That(typeof(ConstrainedToClass<>).MakeGenericType(typeof(string)), Is.Not.Null);
+        Assert.That(typeof(ConstrainedToStruct<>).MakeGenericType(typeof(int)), Is.Not.Null);
     }
 
     public Type GetTernary<T>()

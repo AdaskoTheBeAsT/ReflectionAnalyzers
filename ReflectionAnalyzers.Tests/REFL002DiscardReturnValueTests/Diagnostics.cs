@@ -84,7 +84,7 @@ namespace N
     public static void InvokeWithGetUninitializedObjectAndArgument(string call)
     {
         var code = @"
-#pragma warning disable CS8602, CS8605
+#pragma warning disable CS8602, CS8605, SYSLIB0050
 namespace N
 {
     using System;
