@@ -27,7 +27,7 @@
 
   <PropertyGroup>
     <PackageId>AdaskoTheBeAsT.ReflectionAnalyzer</PackageId>
-    <Version>0.3.1.1</Version>
+    <Version>0.3.1.2</Version>
     <DevelopmentDependency>true</DevelopmentDependency>
     <Description>Analyzers for System.Reflection</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -50,8 +50,8 @@
   <ItemGroup>
     <PackageReference Include="Gu.Analyzers" Version="2.0.3" PrivateAssets="all" />
     <PackageReference Include="Gu.Roslyn.Extensions.Source" Version="0.17.1" />
-    <PackageReference Include="AdaskoTheBeAsT.IDisposableAnalyzers" Version="4.0.7.1" PrivateAssets="all" /> 
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+    <PackageReference Include="AdaskoTheBeAsT.IDisposableAnalyzers" Version="4.0.7.2" PrivateAssets="all" /> 
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
   </ItemGroup>
 
