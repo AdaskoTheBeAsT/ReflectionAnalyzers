@@ -27,7 +27,7 @@
 
   <PropertyGroup>
     <PackageId>AdaskoTheBeAsT.ReflectionAnalyzer</PackageId>
-    <Version>0.3.1.2</Version>
+    <Version>0.3.1.3</Version>
     <DevelopmentDependency>true</DevelopmentDependency>
     <Description>Analyzers for System.Reflection</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -45,12 +45,13 @@
       FEATURE Walk a bit more, smarter analyzers in places.
       BUGFIX Handle nameof when open generic type.
     </PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Gu.Analyzers" Version="2.0.3" PrivateAssets="all" />
     <PackageReference Include="Gu.Roslyn.Extensions.Source" Version="0.17.1" />
-    <PackageReference Include="AdaskoTheBeAsT.IDisposableAnalyzers" Version="4.0.7.2" PrivateAssets="all" /> 
+    <PackageReference Include="AdaskoTheBeAsT.IDisposableAnalyzers" Version="4.0.7.4" PrivateAssets="all" /> 
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
   </ItemGroup>
@@ -63,5 +64,6 @@
   <ItemGroup>
     <None Update="tools\*" Pack="true" PackagePath="" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
