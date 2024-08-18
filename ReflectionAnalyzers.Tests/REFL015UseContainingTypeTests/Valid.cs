@@ -93,7 +93,7 @@ namespace N
 {
     class B
     {
-        internal static readonly int field = 1;
+        internal static readonly int _field = 1;
     }
 }";
         var code = @"
@@ -103,7 +103,7 @@ namespace N
 
      class C : B
     {
-        public object? Get => typeof(C).GetField(nameof(B.field), BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+        public object? Get => typeof(C).GetField(nameof(B._field), BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
     }
 }";
 
